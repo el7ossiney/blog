@@ -1,12 +1,13 @@
 @extends('layouts.app')
 @section('title')
-    Create a new post
+    Edit post
 @endsection
 
 @section('content')
 
-<form class="container mb-3" action="{{route('posts.store')}}" method="POST">
+<form class="container" action="{{route('posts.update',1)}}" method="POST">
     @csrf
+    @method('put')
     <div class="form-group">
       <label for="title">Title</label>
       <input  name='title' type="text" class="form-control" id="title" >
@@ -24,7 +25,7 @@
 
       </select>
     </div>
-    <button type="submit" class="btn btn-success mt-2">Create</button>
+    <button type="submit" class="btn btn-primary mt-2">Edit</button>
 
   </form>
   

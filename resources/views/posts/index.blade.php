@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 <div class="justify-content-center d-flex mt-4 mb-4">
-<a href="#" class="btn btn-success  ">Create</a>
+<a href="{{route('posts.create')}}" class="btn btn-success  ">Create</a>
 </div>
 <div class="justify-content-center d-flex ">
 <table class="table w-75" >
@@ -29,8 +29,12 @@
         <td>{{$post['created_at']}}</td>
         <td>
             <a href="{{route('posts.show',$post['id'])}}" class="btn btn-primary">View</a>
-            <a  class="btn btn-success">Edit</a>
-            <a  class="btn btn-danger">Delete</a>
+            <a href="{{route('posts.edit',$post['id'])}}"  class="btn btn-success">Edit</a>
+            <form action="{{route('posts.destroy',1)}}" method="POST" style="display: inline">
+              @csrf
+              @method('delete')
+              <button type="submit" class="btn btn-danger ">Delete</button>
+            </form>
         </td>
       </tr>
       @endforeach

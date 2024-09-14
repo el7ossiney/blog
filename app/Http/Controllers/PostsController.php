@@ -33,8 +33,19 @@ class PostsController extends Controller
     public function create(){
         return view('posts.create');
     }
+
     public function store(){
         $data = request()->all();
-        dd($data);
+        return to_route('posts.index');
     }
+    public function edit($id){
+        return view('posts.edit',['id'=>$id]);
+    }
+    public function update(){
+        return to_route('posts.show',1);
+    }
+    public function destroy(){
+        return to_route('posts.index');
+    }
+    
 }
