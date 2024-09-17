@@ -5,16 +5,16 @@
 
 @section('content')
 
-<form class="container" action="{{route('posts.update',1)}}" method="POST">
+<form class="container" action="{{route('posts.update',$post->id)}}" method="POST">
     @csrf
     @method('put')
     <div class="form-group">
       <label for="title">Title</label>
-      <input  name='title' type="text" class="form-control" id="title" >
+      <input value="{{$post->title}}" name='title' type="text" class="form-control" id="title" >
     </div>
     <div class="form-group">
         <label for="description">Description</label>
-        <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+        <textarea  name="description" class="form-control" id="description" rows="3"> {{$post->desription}} </textarea>
       </div>
 
     <div class="form-group">

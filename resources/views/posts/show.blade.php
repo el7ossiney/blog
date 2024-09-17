@@ -3,8 +3,8 @@
 Show
 @endsection
 @section('content')
-@foreach ($posts as $post)
-    @if($id === $post['id'])
+
+    
 
  <div class=" justify-content-center">
     <div class="card mt-4 p-1">
@@ -12,8 +12,8 @@ Show
         author info
         </div>
         <div class="card-body">
-      <h5 class="card-title">{{$post['created_by']}}</h5>
-      <p class="card-text"> {{$post['email']}} </p>
+      <h5 class="card-title">{{$post['title']}}</h5>
+      <p class="card-text"> {{$post['desription']}} </p>
       
             </div>
     </div>
@@ -30,6 +30,6 @@ Show
         </div>
      </div>
 </div>
-@endif
-@endforeach
+
+
 @endsection

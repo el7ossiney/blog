@@ -23,17 +23,17 @@
           
       
       <tr>
-        <th scope="row">{{$post['id']}}</th>
-        <td>{{$post['created_by']}}</td>
-        <td>{{$post['book']}}</td>
+        <th scope="row">{{$post->id}}</th>
+        <td>{{$post->title}}</td>
+        <td>{{$post->desription}}</td>
         <td>{{$post['created_at']}}</td>
         <td>
-            <a href="{{route('posts.show',$post['id'])}}" class="btn btn-primary">View</a>
-            <a href="{{route('posts.edit',$post['id'])}}"  class="btn btn-success">Edit</a>
-            <form action="{{route('posts.destroy',1)}}" method="POST" style="display: inline">
+            <a href="{{route('posts.show',$post->id)}}" class="btn btn-primary">View</a>
+            <a href="{{route('posts.edit',$post->id)}}"  class="btn btn-success">Edit</a>
+            <form action="{{route('posts.destroy',$post->id)}}" method="POST" style="display: inline">
               @csrf
               @method('delete')
-              <button type="submit" class="btn btn-danger ">Delete</button>
+              <button type="submit" class="btn btn-danger " >Delete</button>
             </form>
         </td>
       </tr>

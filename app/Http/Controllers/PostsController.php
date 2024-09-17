@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostsController extends Controller
 {
     public function index(){
-        $posts = [
-            ['id'=>'1','created_by'=>'ahmed','book'=>'php','created_at'=>'2020','description'=>'wanna have some experience'],
-            ['id'=>'2','created_by'=>'mohamed','book'=>'js','created_at'=>'2021','description'=>'just try'],
-            ['id'=>'3','created_by'=>'khaled','book'=>'java','created_at'=>'2022','description'=>'just work'],
-            ['id'=>'4','created_by'=>'mohsen','book'=>'bootstrap','created_at'=>'2023','description'=>'just learn']
-        ];
+        
+        $posts=post::all();
+
+
 
         return view('posts.index',['posts'=>$posts]);
     }
@@ -20,15 +19,10 @@ class PostsController extends Controller
 
 
 
-    public function show($id){
-        $posts = [
-            ['id'=>'1','created_by'=>'ahmed','book'=>'php','created_at'=>'2020','description'=>'wanna have some experience','email'=>'ahmed@gmail.com'],
-            ['id'=>'2','created_by'=>'mohamed','book'=>'js','created_at'=>'2021','description'=>'just try','email'=>'mohamed@gmail.com'],
-            ['id'=>'3','created_by'=>'khaled','book'=>'java','created_at'=>'2022','description'=>'just work','email'=>'khaled@gmail.com'],
-            ['id'=>'4','created_by'=>'mohsen','book'=>'bootstrap','created_at'=>'2023','description'=>'just learn','email'=>'mohsen@gmail.com']
-        ];
-
-        return view('posts.show',['id'=>$id,'posts'=>$posts]);
+    public function show(Post $post){
+        
+        
+        return view('posts.show',['post'=>$post]);
     }
     public function create(){
         return view('posts.create');
@@ -36,15 +30,28 @@ class PostsController extends Controller
 
     public function store(){
         $data = request()->all();
+        Post::create([
+            'title' => $data['title'],
+            "desription" => $data['description']
+        ]);
+
         return to_route('posts.index');
     }
-    public function edit($id){
-        return view('posts.edit',['id'=>$id]);
+    public function edit(Post $post){
+        return view('posts.edit',['post'=>$post]);
     }
-    public function update(){
-        return to_route('posts.show',1);
+    public function update($id){
+        $data = request()->all();
+        $singledata =Post::find($id);
+        $singledata ->update([
+            'title' => $data['title'],
+            'desription' => $data['description']
+        ]);
+        return to_route('posts.show', ['post'=> $id ]);
     }
-    public function destroy(){
+    public function destroy($id){
+        $post = Post::find($id);
+        $post ->delete();
         return to_route('posts.index');
     }
     
